@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - name: Clonar el código del repositorio
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configurar Java JDK 11
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '11'
@@ -23,12 +23,11 @@ jobs:
 
     - name: Ejecutar Pruebas de UI (Selenium en modo Headless)
       run: |
-        cd automation-frameworks/java-testng-selenium
-        mvn clean test -Dheadless=true
+        mvn -f automation-frameworks/java-testng-selenium/pom.xml clean test -Dheadless=true
 
     - name: Guardar Reportes como Artefactos
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: testng-execution-reports
         path: automation-frameworks/java-testng-selenium/target/surefire-reports/
