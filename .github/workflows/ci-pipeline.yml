@@ -7,7 +7,8 @@ on:
     branches: [ main, master ]
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   automation-tests:
     runs-on: ubuntu-latest
@@ -26,13 +27,13 @@ jobs:
     - name: Ejecutar Pruebas de UI (Selenium en modo Headless)
       id: run-tests
       run: |
-        mvn -f automation-frameworks/java-testng-selenium/pom.xml clean test -Dheadless=true
+        mvn -f automation-frameworks/java-testng/pom.xml clean test -Dtest=LoginTest -Dheadless=true
 
     - name: Guardar Reportes como Artefactos
-      if: always() # Obliga a ejecutar este paso aunque el paso anterior falle
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: testng-execution-reports
         path: |
-          automation-frameworks/java-testng-selenium/target/surefire-reports/
-        if-no-files-found: warn # Evita que el pipeline se caiga si no encuentra la carpeta
+          automation-frameworks/java-testng/target/surefire-reports/
+        if-no-files-found: warn
