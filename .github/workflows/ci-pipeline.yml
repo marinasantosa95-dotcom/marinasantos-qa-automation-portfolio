@@ -24,7 +24,7 @@ jobs:
         java-version: '11'
         cache: 'maven'
 
-    - name: Ejecutar Pruebas de UI (Selenium en modo Headless)
+    - name: Ejecutar Pruebas de UI
       id: run-tests
       run: |
         mvn -f automation-frameworks/java-testng/pom.xml clean test -Dtest=LoginTest -Dheadless=true
